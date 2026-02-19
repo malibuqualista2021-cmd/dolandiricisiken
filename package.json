@@ -1,0 +1,13 @@
+{
+    "name": "telegram-group-protector",
+    "version": "1.0.0",
+    "description": "Telegram Group Impersonation Protection Bot",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "dependencies": {
+        "dotenv": "^17.3.1",
+        "telegraf": "^4.16.3"
+    }
+}
