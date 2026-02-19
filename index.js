@@ -9,6 +9,22 @@ if (!process.env.BOT_TOKEN) {
 const bot = new Telegraf(process.env.BOT_TOKEN);
 const ADMIN_ID = process.env.ADMIN_ID || '1567981486';
 
+console.log('--- SISTEM BASLATILIYOR ---');
+console.log('ADMIN_ID:', ADMIN_ID);
+if (process.env.BOT_TOKEN) {
+    console.log('BOT_TOKEN bulundu (ilk 5 karakter):', process.env.BOT_TOKEN.substring(0, 5) + '...');
+} else {
+    console.log('HATA: BOT_TOKEN Bulunamadı! Lütfen Railway Variables kısmını kontrol edin.');
+}
+
+console.log('Sistem başlatılıyor...');
+console.log('ADMIN_ID:', ADMIN_ID);
+if (process.env.BOT_TOKEN) {
+    console.log('BOT_TOKEN bulundu (ilk 5 karakter):', process.env.BOT_TOKEN.substring(0, 5) + '...');
+} else {
+    console.log('HATA: BOT_TOKEN Bulunamadı!');
+}
+
 // İsim kontrol fonksiyonu
 const isImpersonator = (user) => {
     if (user.id.toString() === ADMIN_ID) return false;
@@ -69,7 +85,15 @@ bot.on('chat_member', async (ctx) => {
 bot.launch({
     allowedUpdates: ['chat_member', 'message']
 }).then(() => {
+    console.log('------------------------------------------');
     console.log('Grup Koruma Botu Aktif. Malibu taklitçileri yasaklanacak.');
+    return bot.telegram.getMe();
+}).then((me) => {
+    console.log(`Bot başarılı bir şekilde @${me.username} olarak başlatıldı.`);
+    console.log('------------------------------------------');
+}).catch((err) => {
+    console.error('Bot başlatılırken KRİTİK HATA oluştu:');
+    console.error(err);
 });
 
 // Hataları yakala
