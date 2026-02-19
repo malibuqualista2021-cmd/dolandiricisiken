@@ -17,14 +17,6 @@ if (process.env.BOT_TOKEN) {
     console.log('HATA: BOT_TOKEN Bulunamadı! Lütfen Railway Variables kısmını kontrol edin.');
 }
 
-console.log('Sistem başlatılıyor...');
-console.log('ADMIN_ID:', ADMIN_ID);
-if (process.env.BOT_TOKEN) {
-    console.log('BOT_TOKEN bulundu (ilk 5 karakter):', process.env.BOT_TOKEN.substring(0, 5) + '...');
-} else {
-    console.log('HATA: BOT_TOKEN Bulunamadı!');
-}
-
 // İsim kontrol fonksiyonu
 const isImpersonator = (user) => {
     if (user.id.toString() === ADMIN_ID) return false;
