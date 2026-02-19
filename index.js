@@ -29,6 +29,7 @@ const isImpersonator = (user) => {
 // 1. Yeni mesaj atıldığında isim kontrolü (İsim değiştirenleri yakalar)
 bot.on('message', async (ctx) => {
     const user = ctx.from;
+    console.log(`[MESAJ] ${user.first_name} (@${user.username || 'yok'}): ${ctx.message.text || '[Medya]'}`);
 
     if (isImpersonator(user)) {
         try {
