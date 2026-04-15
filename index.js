@@ -31,6 +31,15 @@ bot.on('message', async (ctx) => {
     const user = ctx.from;
     console.log(`[MESAJ] ${user.first_name} (@${user.username || 'yok'}): ${ctx.message.text || '[Medya]'}`);
 
+    // Otomatik 👍 reaksiyon - sadece fotoğraf/grafik mesajlarda
+    if (ctx.message.photo) {
+        try {
+            await ctx.react('👍');
+        } catch (err) {
+            console.error('Reaction hatası:', err.message);
+        }
+    }
+
     if (isImpersonator(user)) {
         try {
             console.log(`[TAKLİT TESPİTİ] ${user.first_name} (@${user.username || 'yok'}) banlanıyor.`);
