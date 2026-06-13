@@ -200,9 +200,13 @@ async function processImpersonator(ctx, user, options) {
         permissionErrors.push(`ban: ${err.message}`);
     }
 
+    const displayName = `${user.first_name || ''} ${user.last_name || ''}`.trim() || 'Bilinmeyen';
+    const usernameLabel = user.username ? `@${user.username}` : 'username yok';
+    const groupNotice = `İşte bir dolandırıcıyı daha siktik: ${displayName} (${usernameLabel}) 🚫`;
+
     const replyExtra = threadId ? { message_thread_id: threadId } : {};
     try {
-        await ctx.telegram.sendMessage(chatId, 'İşte bir dolandırıcıyı daha siktik. 🚫', replyExtra);
+        await ctx.telegram.sendMessage(chatId, groupNotice, replyExtra);
         groupReplySent = true;
     } catch (err) {
         permissionErrors.push(`group_reply: ${err.message}`);
